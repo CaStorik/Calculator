@@ -43,10 +43,17 @@ class Calculator:
         elif char == "⌫":
             self.expression = self.expression[:-1]
         elif char == "=":
+            if self.expression == "":
+                return
             try:
-             self.expression = str(eval(self.expression))
+                result = eval(self.expression)
+                if isinstance(result, float) and result.is_integer():
+                    result = int(result)
+                self.expression = str(result)
+            except ZeroDivisionError:
+                self.expression = "Деление на ноль"
             except Exception:
-             self.expression = "Ошибка"
+                self.expression = "Ошибка"
         else:
             self.expression += char
         self.update_display()
