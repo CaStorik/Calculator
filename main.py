@@ -12,11 +12,11 @@ class Calculator:
         self.display.pack(fill="both", padx=10, pady=10, ipady=10)
 
         buttons = [
-            ["C", "(", ")", "/"],
-            ["7", "8", "9", "*"],
-            ["4", "5", "6", "-"],
-            ["1", "2", "3", "+"],
-            ["0", ".", "=", ""],
+            ["C", "⌫", "(", ")"],
+            ["7", "8", "9", "/"],
+            ["4", "5", "6", "*"],
+            ["1", "2", "3", "-"],
+            ["0", ".", "=", "+"],
         ]
 
         frame = tk.Frame(root)
@@ -39,12 +39,14 @@ class Calculator:
 
     def on_click(self, char):
         if char == "C":
-            self.expression = ""
+         self.expression = ""
+        elif char == "⌫":
+            self.expression = self.expression[:-1]
         elif char == "=":
             try:
-                self.expression = str(eval(self.expression))
+             self.expression = str(eval(self.expression))
             except Exception:
-                self.expression = "Ошибка"
+             self.expression = "Ошибка"
         else:
             self.expression += char
         self.update_display()
